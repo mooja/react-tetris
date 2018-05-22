@@ -1,6 +1,5 @@
-type ActionType = 'TICK' | 'TOCK' | 'ADD_FIGURE';
-
-type FigureType = 'line' | 'block';
+type ActionType = 'TICK' | 'ADD_FIGURE' | 'MOVE_FIGURE';
+type FigureType = 'I' | 'O' | 'T' | 'S' | 'Z' | 'J' | 'L';
 
 
 export interface IReduxAction {
@@ -9,7 +8,7 @@ export interface IReduxAction {
     figure?: FigureType,
 }
 
-export function addFigure(figure: FigureType = 'line') {
+export function addFigure(figure: FigureType = 'I') {
     const type: ActionType = 'ADD_FIGURE';
     return { type, figure }
 }
