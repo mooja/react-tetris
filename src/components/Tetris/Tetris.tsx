@@ -5,32 +5,42 @@ import { connect } from 'react-redux';
 import { IGridState } from '../../reducers'
 
 
-interface ITetrisProps {
-    state?: any,
-    children?: any
-    grid?: any
-}
-
 const mapStateToProps = (state: IGridState) => {
     return {
-        grid: state.grid
+        gridState: state
     }
 }
 
+function projectFigureToGrid(gridState: IGridState): string {
+    const { x, y } = gridState.figurePos;
+    const MutableGrid: string[] = gridState.grid.split('');
+    for (let i=0; i < 4; i++) {
+        MutableGrid[x*10 + y+i] = '#'
+    }
+    return MutableGrid.join('');
+}
+
+
+interface ITetrisProps {
+    gridState: IGridState
+    children?: any
+}
+
 export const Tetris: React.SFC<ITetrisProps> = (props) => {
-    const cells: any[] = props.grid
+    const projectedGrid = projectFigureToGrid(props.gridState);
+    const cells: any[] = projectedGrid
         .split('')
-        .map((ch: string) => 
+        .map((ch, index) => 
             ch ===  ' ' 
-                ? <div className="block empty-block"/>
-                : <div className="block full-block"/>
+                ? <div key={index} className="block empty-block"/>
+                : <div key={index} className="block full-block"/>
         );
     
     return (
-        <div className="Tetris">
-        { cells }
+        <div className="Tetris"> 
+            { cells } 
         </div>
-    )
+    );
 }
 
 export default connect(mapStateToProps)(Tetris);
