@@ -7,9 +7,9 @@ body {
     display: grid;
     grid-template: repeat(20, 1fr) / repeat(10, 1fr);
     border: 1px solid teal;
-    width: 300px;
-    height: 600px;
-    margin: 3rem auto;
+    width: 23rem;
+    height: 46rem;
+    margin: 0 auto;
 }
 
 .block {
